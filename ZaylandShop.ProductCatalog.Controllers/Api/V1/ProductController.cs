@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ZaylandShop.ProductCatalog.Controllers.Models;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ZaylandShop.ProductCatalog.Abstractions;
+using ZaylandShop.ProductCatalog.Utils.ApiResponse;
 
 namespace ZaylandShop.ProductCatalog.Controllers.Api.V1;
 
@@ -8,17 +11,34 @@ namespace ZaylandShop.ProductCatalog.Controllers.Api.V1;
 [ApiController]
 public class ProductController : Controller
 {
+    private readonly IProductService _productService;
+    private readonly IMapper _mapper;
 
-    public ProductController()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="mapper"></param>
+    /// <param name="productService"></param>
+    public ProductController(IMapper mapper, IProductService productService)
     {
+        _mapper = mapper;
+        _productService = productService;
     }
 
-    [HttpGet]
-    public IActionResult Test(string data)
+    /// <summary>
+    /// ВО
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponseResult<Contracts.Models.Product.Product>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiResponse))]
+    [Consumes("application/json")]
+    [Produces("application/json")]
+    public async Task<ApiResponseResult<Contracts.Models.Product.Product>> GetProduct([FromRoute] long id)
     {
-        return Ok(new Test()
-        {
-            Name = data
-        });
+        var product = await _productService.GetProductByIdAsync(id);
+        var dto = _mapper.Map<Contracts.Models.Product.Product>(product);
+        return ApiResponse.CreateSuccess(dto);
     }
 }

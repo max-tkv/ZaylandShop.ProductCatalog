@@ -18,14 +18,15 @@ public static class Entry
     /// <returns>IServiceCollection</returns>
     public static IServiceCollection AddSqlStorage(
         this IServiceCollection serviceCollection, 
-        Action<DbContextOptionsBuilder> optionsAction)
+        Action<DbContextOptionsBuilder>? optionsAction)
     {
         serviceCollection.AddDbContext<AppDbContext>(optionsAction ?? DefaultOptionsAction)
             .AddScoped<IUnitOfWork, UnitOfWork>()
             .AddTransient<IProductRepository, ProductRepository>()
             .AddTransient<IBrandRepository, BrandRepository>()
             .AddTransient<IColorRepository, ColorRepository>()
-            .AddTransient<ICategoryRepository, CategoryRepository>();
+            .AddTransient<ICategoryRepository, CategoryRepository>()
+            .AddTransient<IFileRepository, FileRepository>();
         
         return serviceCollection;
     }

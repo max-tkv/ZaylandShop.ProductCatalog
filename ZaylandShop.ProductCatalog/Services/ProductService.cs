@@ -20,7 +20,12 @@ public class ProductService : IProductService
         await _productRepository.AddAsync(product);
         await _unitOfWork.SaveChangesAsync();
     }
-    
+
+    public async Task<Product> GetProductByIdAsync(long id)
+    {
+        return await _productRepository.GetByIdAsync(id);
+    }
+
     public async Task<ICollection<Product>> GetAllProductsAsync()
     {
         var products = await _productRepository.GetAllAsync();

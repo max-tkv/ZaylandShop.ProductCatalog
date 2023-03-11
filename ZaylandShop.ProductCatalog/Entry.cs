@@ -19,6 +19,7 @@ public static class Entry
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<IBrandService, BrandService>();
         services.AddTransient<IColorService, ColorService>();
+        services.AddTransient<IFileService, FileService>();
         
         return services;
     }
