@@ -1,12 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace ZaylandShop.ProductCatalog.Repositories;
+﻿namespace ZaylandShop.ProductCatalog.Repositories;
 
 public interface IRepository<TEntity> where TEntity : class, new()
 {
-    ValueTask<TEntity> GetAsync(object id);
-    void Add([NotNull]TEntity entity);
-    void Delete([NotNull]TEntity entity);
-    void Update([NotNull]TEntity entity);
-    void AttachRange(TEntity[] entities);
+    Task<TEntity> GetByIdAsync(int id);
+    
+    Task<IEnumerable<TEntity>> GetAllAsync();
+    
+    Task AddAsync(TEntity entity);
+    
+    Task UpdateAsync(TEntity entity);
+    
+    Task DeleteAsync(TEntity entity);
 }

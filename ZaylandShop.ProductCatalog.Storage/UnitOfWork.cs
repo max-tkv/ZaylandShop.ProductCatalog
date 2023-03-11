@@ -1,48 +1,54 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using ZaylandShop.ProductCatalog.Abstractions;
-using ZaylandShop.ProductCatalog.Repositories;
-using ZaylandShop.ProductCatalog.Storage.Repositories;
 
 namespace ZaylandShop.ProductCatalog.Storage;
 
 public class UnitOfWork : IUnitOfWork
 {
-    public IAppUserRepository Users { get; }
+    private readonly AppDbContext _dbContext;
+    private IDbContextTransaction _transaction;
 
-    private readonly AppDbContext _appDbContext;
-    private bool _isDisposed;
-    
-    public UnitOfWork([NotNull] AppDbContext appDbContext)
+    public UnitOfWork(AppDbContext dbContext)
     {
-        _appDbContext = appDbContext;
+        _dbContext = dbContext;
+    }
 
-        Users = new AppUserRepository(appDbContext);
+    public async Task BeginTransactionAsync()
+    {
+        _transaction = await _dbContext.Database.BeginTransactionAsync();
+    }
+
+    public async Task CommitTransactionAsync()
+    {
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+            await _transaction.CommitAsync();
+        }
+        catch
+        {
+            await RollbackTransactionAsync();
+            throw;
+        }
+    }
+
+    public async Task RollbackTransactionAsync()
+    {
+        await _transaction.RollbackAsync();
+        Dispose();
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _dbContext.SaveChangesAsync();
     }
 
     public void Dispose()
     {
-        if (_isDisposed)
+        if (_transaction != null)
         {
-            return;
+            _transaction.Dispose();
+            _transaction = null;
         }
-
-        _isDisposed = true;
-        _appDbContext.Dispose();
-    }
-
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        _appDbContext.ChangeTracker.DetectChanges();
-        return await _appDbContext.SaveChangesAsync(cancellationToken);
-    }
-
-    public Task DetachAllTrackingEntitiesAsync()
-    {
-        foreach (var entityEntry in _appDbContext.ChangeTracker.Entries())
-        {
-            _appDbContext.Attach(entityEntry.Entity).State = EntityState.Detached;
-        }
-        return Task.CompletedTask;
     }
 }

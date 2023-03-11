@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ZaylandShop.ProductCatalog.Repositories;
 
 namespace ZaylandShop.ProductCatalog.Storage.Repositories
@@ -7,24 +6,38 @@ namespace ZaylandShop.ProductCatalog.Storage.Repositories
 	public abstract class Repository<TEntity> : IRepository<TEntity>
 		where TEntity : class, new()
 	{
-		protected AppDbContext Context { get; }
+		private readonly AppDbContext _dbContext;
+		private readonly DbSet<TEntity> _dbSet;
 
-		protected DbSet<TEntity> DbSet { get; }
-
-		protected Repository([NotNull] AppDbContext context)
+		public Repository(AppDbContext dbContext)
 		{
-			Context = context;
-			DbSet = context.Set<TEntity>();
+			_dbContext = dbContext;
+			_dbSet = _dbContext.Set<TEntity>();
 		}
 
-		public ValueTask<TEntity> GetAsync(object id) => DbSet.FindAsync(id);
+		public async Task<TEntity> GetByIdAsync(int id)
+		{
+			return await _dbSet.FindAsync(id);
+		}
 
-		public void Add(TEntity entity) => Context.Attach(entity).State = EntityState.Added;
+		public async Task<IEnumerable<TEntity>> GetAllAsync()
+		{
+			return await _dbSet.ToListAsync();
+		}
 
-		public void Delete(TEntity entity) => Context.Attach(entity).State = EntityState.Deleted;
+		public async Task AddAsync(TEntity entity)
+		{
+			await _dbSet.AddAsync(entity);
+		}
 
-		public void Update(TEntity entity) => Context.Attach(entity).State = EntityState.Modified;
+		public async Task UpdateAsync(TEntity entity)
+		{
+			_dbSet.Update(entity);
+		}
 
-		public void AttachRange(TEntity[] entities) => Context.AttachRange(entities);
+		public async Task DeleteAsync(TEntity entity)
+		{
+			_dbSet.Remove(entity);
+		}
 	}
 }

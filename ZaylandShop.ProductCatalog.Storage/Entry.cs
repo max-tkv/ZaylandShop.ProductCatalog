@@ -21,8 +21,11 @@ public static class Entry
         Action<DbContextOptionsBuilder> optionsAction)
     {
         serviceCollection.AddDbContext<AppDbContext>(optionsAction ?? DefaultOptionsAction)
-            .AddTransient<IUnitOfWork, UnitOfWork>()
-            .AddTransient<IAppUserRepository, AppUserRepository>();
+            .AddScoped<IUnitOfWork, UnitOfWork>()
+            .AddTransient<IProductRepository, ProductRepository>()
+            .AddTransient<IBrandRepository, BrandRepository>()
+            .AddTransient<IColorRepository, ColorRepository>()
+            .AddTransient<ICategoryRepository, CategoryRepository>();
         
         return serviceCollection;
     }

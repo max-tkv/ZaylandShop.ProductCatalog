@@ -1,6 +1,6 @@
 ﻿namespace ZaylandShop.ProductCatalog.Controllers.Invariants;
 
-public static class TestControllerInvariants
+public static class ProductControllerInvariants
 {
     public const string Error = "Ощибка!";
 }

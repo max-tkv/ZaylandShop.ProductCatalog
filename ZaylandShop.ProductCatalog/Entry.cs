@@ -15,7 +15,11 @@ public static class Entry
     /// <returns>IServiceCollection</returns>
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        services.AddTransient<ITestService, TestService>();
+        services.AddTransient<IProductService, ProductService>();
+        services.AddTransient<ICategoryService, CategoryService>();
+        services.AddTransient<IBrandService, BrandService>();
+        services.AddTransient<IColorService, ColorService>();
+        
         return services;
     }
     

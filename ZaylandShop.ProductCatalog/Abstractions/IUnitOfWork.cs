@@ -1,8 +1,9 @@
-﻿using ZaylandShop.ProductCatalog.Repositories;
-
-namespace ZaylandShop.ProductCatalog.Abstractions;
+﻿namespace ZaylandShop.ProductCatalog.Abstractions;
 
 public interface IUnitOfWork : IDisposable
 {
-    IAppUserRepository Users { get; }
+    Task BeginTransactionAsync();
+    Task CommitTransactionAsync();
+    Task RollbackTransactionAsync();
+    Task SaveChangesAsync();
 }

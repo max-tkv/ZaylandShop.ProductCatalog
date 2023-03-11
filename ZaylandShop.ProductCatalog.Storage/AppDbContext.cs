@@ -17,7 +17,11 @@ public class AppDbContext : DbContext
         base.OnModelCreating(builder);
 
         builder
-            .ApplyConfiguration(new AppUserConfiguration());
+            .ApplyConfiguration(new ProductConfiguration())
+            .ApplyConfiguration(new BrandConfiguration())
+            .ApplyConfiguration(new CategoryConfiguration())
+            .ApplyConfiguration(new ProductColorConfiguration())
+            .ApplyConfiguration(new ProductFileConfiguration());
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
