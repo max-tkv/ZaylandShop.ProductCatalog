@@ -22,7 +22,7 @@ public static class Entry
         serviceCollection.AddSwaggerGen(options =>
         {
             {   //Добавляем документации для контроллеров
-                var xmlFile = $"{Assembly.GetAssembly(typeof(TestController))?.GetName().Name}.xml";
+                var xmlFile = $"{Assembly.GetAssembly(typeof(ProductController))?.GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
             }

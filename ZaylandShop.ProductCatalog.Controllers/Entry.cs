@@ -12,7 +12,7 @@ public static class Entry
     /// <param name="builder">IMvcBuilder</param>
     /// <returns>IMvcBuilder</returns>
     public static IMvcBuilder AddApi(this IMvcBuilder builder) =>
-        builder.AddApplicationPart(Assembly.GetAssembly(typeof(TestController)) ?? throw new AggregateException());
+        builder.AddApplicationPart(Assembly.GetAssembly(typeof(ProductController)) ?? throw new AggregateException());
 
     /// <summary>
     /// Добавление FluentValidation 

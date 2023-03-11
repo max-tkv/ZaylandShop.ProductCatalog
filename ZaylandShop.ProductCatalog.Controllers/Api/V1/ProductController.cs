@@ -6,10 +6,10 @@ namespace ZaylandShop.ProductCatalog.Controllers.Api.V1;
 [ApiVersion("1")]
 [Route("v{version:apiVersion}/[controller]")]
 [ApiController]
-public class TestController : Controller
+public class ProductController : Controller
 {
 
-    public TestController()
+    public ProductController()
     {
     }
 
