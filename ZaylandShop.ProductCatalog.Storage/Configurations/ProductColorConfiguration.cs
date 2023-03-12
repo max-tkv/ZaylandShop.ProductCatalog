@@ -26,7 +26,7 @@ public class ProductColorConfiguration : IEntityTypeConfiguration<ProductColor>
         
         builder.Property(p => p.Hex)
             .IsRequired()
-            .HasMaxLength(6);
+            .HasMaxLength(7);
         
         builder.HasMany(o => o.Products)
             .WithOne(i => i.ProductColor)
