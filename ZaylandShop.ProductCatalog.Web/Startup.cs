@@ -77,6 +77,7 @@ public class Startup
             IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
             MigrationsRunner.ApplyMigrations(logger, serviceProvider, "ZaylandShop.ProductCatalog.Web").Wait();
+            AppInitializer.Initialize().Wait();
             RegisterLifetimeLogging(lifetime, logger);
             
             if (env.IsDevelopment())
