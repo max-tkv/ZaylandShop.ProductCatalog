@@ -29,7 +29,11 @@ public class Startup
             {
                 mc.AddProfiles(new Profile[]
                 {
-                    new ProductControllerMappingProfile()
+                    new ProductControllerMappingProfile(),
+                    new BrandControllerMappingProfile(),
+                    new ColorControllerMappingProfile(),
+                    new FileControllerMappingProfile(),
+                    new CategoryControllerMappingProfile()
                 });
             }).CreateMapper());
             

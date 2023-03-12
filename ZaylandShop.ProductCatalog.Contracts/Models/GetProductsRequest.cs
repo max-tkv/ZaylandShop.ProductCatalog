@@ -1,4 +1,4 @@
-﻿namespace ZaylandShop.ProductCatalog.Contracts.Models.Product;
+﻿namespace ZaylandShop.ProductCatalog.Contracts.Models;
 
 public class GetProductsRequest
 {

@@ -12,6 +12,6 @@ public class ProductControllerMappingProfile : Profile
         
         CreateMap<Entities.Product, Product>(MemberList.Destination);
         
-        CreateMap<GetProductsRequest, ProductFilter>(MemberList.Destination);
+        CreateMap<Contracts.Models.GetProductsRequest, ProductFilter>(MemberList.Destination);
     }
 }

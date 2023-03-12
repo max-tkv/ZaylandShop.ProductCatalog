@@ -1,4 +1,4 @@
-﻿namespace ZaylandShop.ProductCatalog.Contracts.Models.File;
+﻿namespace ZaylandShop.ProductCatalog.Contracts.Models;
 
 public class File
 {

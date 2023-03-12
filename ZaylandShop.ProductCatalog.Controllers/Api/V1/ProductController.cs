@@ -56,7 +56,7 @@ public class ProductController : Controller
     [Consumes("application/json")]
     [Produces("application/json")]
     public async Task<ApiResponseResult<ICollection<Product>>> GetProducts(
-        [FromQuery] GetProductsRequest request)
+        [FromQuery] Contracts.Models.GetProductsRequest request)
     {
         var filter = _mapper.Map<ProductFilter>(request);
         var products = await _productService.GetProductByFilerAsync(filter);
