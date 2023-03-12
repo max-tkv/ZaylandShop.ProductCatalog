@@ -50,7 +50,7 @@ public class ProductController : Controller
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    [HttpGet]
+    [HttpGet("filter")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponseResult<ICollection<Product>>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiResponse))]
     [Consumes("application/json")]
