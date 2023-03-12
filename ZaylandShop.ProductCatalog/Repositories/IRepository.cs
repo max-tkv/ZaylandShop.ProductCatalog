@@ -2,8 +2,6 @@
 
 public interface IRepository<TEntity> where TEntity : class, new()
 {
-    Task<TEntity> GetByIdAsync(long id);
-    
     Task<IEnumerable<TEntity>> GetAllAsync();
     
     Task AddAsync(TEntity entity);

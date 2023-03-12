@@ -15,11 +15,6 @@ namespace ZaylandShop.ProductCatalog.Storage.Repositories
 			_dbSet = _dbContext.Set<TEntity>();
 		}
 
-		public async Task<TEntity> GetByIdAsync(long id)
-		{
-			return await _dbSet.FindAsync(id);
-		}
-
 		public async Task<IEnumerable<TEntity>> GetAllAsync()
 		{
 			return await _dbSet.ToListAsync();

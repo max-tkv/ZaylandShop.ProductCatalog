@@ -8,4 +8,6 @@ public interface IProductRepository : IRepository<Entities.Product>
         Expression<Func<Entities.Product, bool>> filter, 
         int page, 
         int size);
+
+    Task<Entities.Product> GetByIdAsync(long id);
 }

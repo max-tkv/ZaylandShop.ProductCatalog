@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using ZaylandShop.ProductCatalog.Entities;
 using ZaylandShop.ProductCatalog.Repositories;
 
 namespace ZaylandShop.ProductCatalog.Storage.Repositories;
@@ -21,4 +22,13 @@ public class ProductRepository : Repository<Entities.Product>, IProductRepositor
             .Skip((page - 1) * size)
             .Take(size)
             .ToListAsync();
+
+    public async Task<Product> GetByIdAsync(long id) =>
+        await _dbSet.AsNoTracking()
+            .Where(x => x.Id == id)
+            .Include(x => x.Categories)
+            .Include(x => x.Brand)
+            .Include(x => x.ProductColor)
+            .Include(x => x.Files)
+            .SingleOrDefaultAsync();
 }
