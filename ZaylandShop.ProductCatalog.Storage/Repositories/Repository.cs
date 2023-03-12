@@ -6,8 +6,8 @@ namespace ZaylandShop.ProductCatalog.Storage.Repositories
 	public abstract class Repository<TEntity> : IRepository<TEntity>
 		where TEntity : class, new()
 	{
-		private readonly AppDbContext _dbContext;
-		private readonly DbSet<TEntity> _dbSet;
+		private protected readonly AppDbContext _dbContext;
+		private protected readonly DbSet<TEntity> _dbSet;
 
 		public Repository(AppDbContext dbContext)
 		{

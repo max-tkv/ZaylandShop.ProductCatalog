@@ -1,0 +1,14 @@
+﻿namespace ZaylandShop.ProductCatalog.Contracts.Models.Product;
+
+public class GetProductsRequest
+{
+    public ICollection<long>? CategoryIds { get; set; }
+    
+    public long? ColorId { get; set; }
+    
+    public long? BrandId { get; set; }
+    
+    public int Size { get; set; }
+    
+    public int Page { get; set; }
+}
