@@ -1,5 +1,8 @@
-﻿namespace ZaylandShop.ProductCatalog.Repositories;
+﻿using ZaylandShop.ProductCatalog.Entities;
 
-public interface IFileRepository : IRepository<Entities.ProductFile>
+namespace ZaylandShop.ProductCatalog.Repositories;
+
+public interface IFileRepository : IRepository<ProductFile>
 {
+    Task<ProductFile?> GetByIdAsync(long id);
 }
