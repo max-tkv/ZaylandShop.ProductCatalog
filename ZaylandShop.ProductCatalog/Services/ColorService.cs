@@ -7,23 +7,24 @@ namespace ZaylandShop.ProductCatalog.Services;
 public class ColorService : IColorService
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IColorRepository _colorRepository;
 
-    public ColorService(IUnitOfWork unitOfWork, IColorRepository colorRepository)
+    public ColorService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _colorRepository = colorRepository;
     }
 
     public async Task AddColorAsync(ProductColor color)
     {
-        await _colorRepository.AddAsync(color);
+        await _unitOfWork.Colors.AddAsync(color);
         await _unitOfWork.SaveChangesAsync();
     }
     
     public async Task<ICollection<ProductColor>> GetAllColorsAsync()
     {
-        var colors = await _colorRepository.GetAllAsync();
+        var colors = await _unitOfWork.Colors.GetAllAsync();
         return colors.ToList();
     }
+    
+    public async Task<ProductColor?> GetByIdAsync(long id) =>
+        await _unitOfWork.Colors.GetByIdAsync(id);
 }
