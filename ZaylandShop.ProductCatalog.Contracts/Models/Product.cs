@@ -3,13 +3,9 @@
 public class Product
 {
     public string Name { get; set; }
-    
-    public long ProductColorId { get; set; }
-    
+
     public Color ProductColor { get; set; }
-    
-    public long BrandId { get; set; }
-    
+
     public Brand Brand { get; set; }
     
     public decimal Price { get; set; }

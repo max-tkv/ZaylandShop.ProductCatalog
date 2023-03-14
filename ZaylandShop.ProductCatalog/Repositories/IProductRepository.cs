@@ -1,13 +1,10 @@
-﻿using System.Linq.Expressions;
+﻿using ZaylandShop.ProductCatalog.Models;
 
 namespace ZaylandShop.ProductCatalog.Repositories;
 
 public interface IProductRepository : IRepository<Entities.Product>
 {
-    Task<List<Entities.Product>> GetByFilerAsync(
-        Expression<Func<Entities.Product, bool>> filter, 
-        int page, 
-        int size);
+    Task<ICollection<Entities.Product>> GetByFilerAsync(ProductFilter productFile);
 
     Task<Entities.Product> GetByIdAsync(long id);
 }

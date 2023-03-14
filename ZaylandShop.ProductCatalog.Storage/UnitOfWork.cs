@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using ZaylandShop.ProductCatalog.Abstractions;
-using ZaylandShop.ProductCatalog.Entities;
 using ZaylandShop.ProductCatalog.Repositories;
 using ZaylandShop.ProductCatalog.Storage.Repositories;
 
@@ -12,15 +11,15 @@ public class UnitOfWork : IUnitOfWork
     
     private IDbContextTransaction _transaction;
     
-    public IRepository<Product> Products { get; }
+    public IProductRepository Products { get; }
     
-    public IRepository<Category> Categories { get; }
+    public ICategoryRepository Categories { get; }
     
-    public IRepository<ProductFile> Files { get; }
+    public IFileRepository Files { get; }
 
-    public IRepository<ProductColor> Colors { get; }
+    public IColorRepository Colors { get; }
 
-    public IRepository<Brand> Brands { get; }
+    public IBrandRepository Brands { get; }
 
     public UnitOfWork(AppDbContext dbContext)
     {
