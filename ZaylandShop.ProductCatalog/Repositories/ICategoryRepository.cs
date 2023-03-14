@@ -1,5 +1,8 @@
-﻿namespace ZaylandShop.ProductCatalog.Repositories;
+﻿using ZaylandShop.ProductCatalog.Entities;
 
-public interface ICategoryRepository : IRepository<Entities.Category>
+namespace ZaylandShop.ProductCatalog.Repositories;
+
+public interface ICategoryRepository : IRepository<Category>
 {
+    Task<Category?> GetByIdAsync(long id);
 }

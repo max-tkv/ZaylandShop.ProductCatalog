@@ -24,8 +24,6 @@ public class BrandService : IBrandService
         return brands.ToList();
     }
 
-    public async Task<Brand?> GetByIdAsync(long id)
-    {
-        return await _unitOfWork.Brands.GetByIdAsync(id);
-    }
+    public async Task<Brand?> GetByIdAsync(long id) =>
+        await _unitOfWork.Brands.GetByIdAsync(id);
 }
