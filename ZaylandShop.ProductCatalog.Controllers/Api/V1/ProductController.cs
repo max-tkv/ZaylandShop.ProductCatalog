@@ -39,7 +39,7 @@ public class ProductController : Controller
     [Produces("application/json")]
     public async Task<ApiResponseResult<Product>> GetProduct([FromRoute] long id)
     {
-        var product = await _productService.GetProductByIdAsync(id);
+        var product = await _productService.GetByIdAsync(id);
         var dto = _mapper.Map<Product>(product);
         
         return ApiResponse.CreateSuccess(dto);

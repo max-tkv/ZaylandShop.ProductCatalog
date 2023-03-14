@@ -7,7 +7,7 @@ public interface IProductService
 {
     Task AddProductAsync(Product product);
     
-    Task<Product> GetProductByIdAsync(long id);
+    Task<Product?> GetByIdAsync(long id);
     
     Task<ICollection<Product>> GetAllProductsAsync();
 

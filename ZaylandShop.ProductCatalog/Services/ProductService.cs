@@ -19,19 +19,15 @@ public class ProductService : IProductService
         await _unitOfWork.SaveChangesAsync();
     }
 
-    public async Task<Product> GetProductByIdAsync(long id)
-    {
-        return await _unitOfWork.Products.GetByIdAsync(id);
-    }
-
+    public async Task<Product?> GetByIdAsync(long id) =>
+        await _unitOfWork.Products.GetByIdAsync(id);
+    
     public async Task<ICollection<Product>> GetAllProductsAsync()
     {
         var products = await _unitOfWork.Products.GetAllAsync();
         return products.ToList();
     }
 
-    public async Task<ICollection<Product>> GetProductByFilerAsync(ProductFilter productFilter)
-    {
-        return await _unitOfWork.Products.GetByFilerAsync(productFilter);
-    }
+    public async Task<ICollection<Product>> GetProductByFilerAsync(ProductFilter productFilter) =>
+        await _unitOfWork.Products.GetByFilerAsync(productFilter);
 }
