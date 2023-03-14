@@ -1,5 +1,8 @@
-﻿namespace ZaylandShop.ProductCatalog.Repositories;
+﻿using ZaylandShop.ProductCatalog.Entities;
 
-public interface IBrandRepository : IRepository<Entities.Brand>
+namespace ZaylandShop.ProductCatalog.Repositories;
+
+public interface IBrandRepository : IRepository<Brand>
 {
+    Task<Brand?> GetByIdAsync(long id);
 }

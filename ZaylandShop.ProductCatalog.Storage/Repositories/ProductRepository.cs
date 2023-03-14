@@ -39,7 +39,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
             .ToListAsync();
     }
 
-    public async Task<Product> GetByIdAsync(long id) =>
+    public async Task<Product?> GetByIdAsync(long id) =>
         await _dbSet.AsNoTracking()
             .Where(x => x.Id == id)
             .Include(x => x.Categories)
