@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -37,10 +38,21 @@ public class Startup
                 });
             }).CreateMapper());
             
-            services.AddControllers().AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.PropertyNamingPolicy = null;
-            });
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+                {
+                    options.Authority = _configuration["IdentityServer:Url"];
+                    options.RequireHttpsMetadata = true;
+                    options.Audience = "myapi";
+                });
+            
+            services
+                .AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
             services.AddSqlStorage(options =>
             {
                 options.UseSqlServer(_configuration.GetConnectionString("Db") ?? "");
@@ -97,6 +109,9 @@ public class Startup
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

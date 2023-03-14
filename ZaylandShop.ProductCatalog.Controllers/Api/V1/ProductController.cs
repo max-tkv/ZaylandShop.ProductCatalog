@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ZaylandShop.ProductCatalog.Abstractions;
@@ -11,6 +12,7 @@ namespace ZaylandShop.ProductCatalog.Controllers.Api.V1;
 [ApiVersion("1")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
+[Authorize]
 public class ProductController : Controller
 {
     private readonly IProductService _productService;

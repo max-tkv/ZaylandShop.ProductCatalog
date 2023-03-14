@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ZaylandShop.ProductCatalog.Abstractions;
@@ -9,6 +10,7 @@ namespace ZaylandShop.ProductCatalog.Controllers.Api.V1;
 [ApiVersion("1")]
 [Route("v{version:apiVersion}/[controller]")]
 [ApiController]
+[Authorize]
 public class FileController : Controller
 {
     private readonly IFileService _fileService;

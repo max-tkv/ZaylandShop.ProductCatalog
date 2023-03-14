@@ -22,7 +22,8 @@ namespace ZaylandShop.ProductCatalog.Web.Configuration.Swagger
 				{
 					Title = $"ZaylandShop.ProductCatalog API {description.GroupName}",
 					Version = description.ApiVersion.ToString(),
-					Description = "Сервис авторизации и аутентификации",
+					Description = "Сервис, хранит информацию обо всех товарах в интернет-магазине " +
+					              "и обеспечивает возможность их поиска и просмотра",
 				});
 			}
 		}
